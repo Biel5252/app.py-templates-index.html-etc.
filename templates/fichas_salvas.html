@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Fichas de RPG</title>
+    <title>Fichas Salvas</title>
 </head>
 <body>
-    <h1>Fichas de RPG</h1>
+    <h1>Fichas Salvas</h1>
     <ul>
         {% for ficha in fichas %}
         <li>
@@ -28,20 +28,9 @@
         </li>
         {% endfor %}
     </ul>
-
-    <h2>Adicionar Nova Ficha</h2>
-    <form action="/adicionar" method="POST">
-        Nome: <input type="text" name="nome" required><br>
-        Classe: <input type="text" name="classe" required><br>
-        Nível: <input type="number" name="nivel" required><br>
-        Força: <input type="number" name="forca" required><br>
-        Destreza: <input type="number" name="destreza" required><br>
-        Constituição: <input type="number" name="constituicao" required><br>
-        Inteligência: <input type="number" name="inteligencia" required><br>
-        Sabedoria: <input type="number" name="sabedoria" required><br>
-        Carisma: <input type="number" name="carisma" required><br>
-        <button type="submit">Adicionar Ficha</button>
-    </form>
+    <a href="/">
+        <button>Voltar</button>
+    </a>
 
     <h2>Rolagem de Dados</h2>
     <form id="rolar-dados-form">
@@ -54,7 +43,6 @@
     <div id="resultado-rolagem"></div>
 
     <script>
-        // Função para rolar dados usando JavaScript e exibir o resultado
         function rolarDados() {
             const quantidade = document.getElementById('quantidade').value;
             const faces = document.getElementById('faces').value;
