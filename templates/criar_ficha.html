@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Ficha</title>
+</head>
+<body>
+    <h1>Criar Nova Ficha</h1>
+    <form action="/adicionar" method="POST">
+        Nome: <input type="text" name="nome" required><br>
+        Classe: <input type="text" name="classe" required><br>
+        Nível: <input type="number" name="nivel" required><br>
+        Força: <input type="number" name="forca" required><br>
+        Destreza: <input type="number" name="destreza" required><br>
+        Constituição: <input type="number" name="constituicao" required><br>
+        Inteligência: <input type="number" name="inteligencia" required><br>
+        Sabedoria: <input type="number" name="sabedoria" required><br>
+        Carisma: <input type="number" name="carisma" required><br>
+        <button type="submit">Salvar Ficha</button>
+    </form>
+    <a href="/">
+        <button>Voltar</button>
+    </a>
+</body>
+</html>

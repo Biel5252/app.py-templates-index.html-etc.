@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fichas Salvas</title>
+</head>
+<body>
+    <h1>Fichas Salvas</h1>
+    <ul>
+        {% for ficha in fichas %}
+        <li>
+            <strong>{{ ficha.nome }}</strong> - {{ ficha.classe }} (Nível {{ ficha.nivel }})
+            <ul>
+                <li>Força: {{ ficha.atributos.forca }}</li>
+                <li>Destreza: {{ ficha.atributos.destreza }}</li>
+                <li>Constituição: {{ ficha.atributos.constituicao }}</li>
+                <li>Inteligência: {{ ficha.atributos.inteligencia }}</li>
+                <li>Sabedoria: {{ ficha.atributos.sabedoria }}</li>
+                <li>Carisma: {{ ficha.atributos.carisma }}</li>
+            </ul>
+            <form action="/excluir/{{ loop.index0 }}" method="POST" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+            <a href="/editar/{{ loop.index0 }}">
+                <button>Editar</button>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/">
+        <button>Voltar</button>
+    </a>
+
+    <h2>Rolagem de Dados</h2>
+    <form id="rolar-dados-form">
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
+        <label for="faces">Faces:</label>
+        <input type="number" id="faces" name="faces" min="2" value="6" required>
+        <button type="button" onclick="rolarDados()">Rolar Dados</button>
+    </form>
+    <div id="resultado-rolagem"></div>
+
+    <script>
+        function rolarDados() {
+            const quantidade = document.getElementById('quantidade').value;
+            const faces = document.getElementById('faces').value;
+
+            fetch(`/rolar/${quantidade}d${faces}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultadoDiv = document.getElementById('resultado-rolagem');
+                    resultadoDiv.innerHTML = `
+                        <p>Resultados: ${data.resultados.join(', ')}</p>
+                        <p>Total: ${data.total}</p>
+                    `;
+                })
+                .catch(error => console.error('Erro ao rolar dados:', error));
+        }
+    </script>
+</body>
+</html>
