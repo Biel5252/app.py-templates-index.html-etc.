@@ -1,8 +1,27 @@
 from flask import Flask, render_template, request, redirect, jsonify
 import json
 import os
+import random  # Importe a biblioteca random para gerar números aleatórios
 
 app = Flask(__name__)
+
+# Função para rolar dados
+def rolar_dados(quantidade, faces):
+    resultados = [random.randint(1, faces) for _ in range(quantidade)]
+    return resultados
+
+# Rota para rolar dados
+@app.route('/rolar/<int:quantidade>d<int:faces>')
+def rolar(quantidade, faces):
+    resultados = rolar_dados(quantidade, faces)
+    return jsonify({
+        'quantidade': quantidade,
+        'faces': faces,
+        'resultados': resultados,
+        'total': sum(resultados)
+    })
+
+# Restante do código do app...
 
 # Arquivo JSON para armazenar as fichas
 FICHAS_FILE = 'fichas.json'

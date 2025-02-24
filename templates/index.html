@@ -28,7 +28,7 @@
         </li>
         {% endfor %}
     </ul>
-    
+
     <h2>Adicionar Nova Ficha</h2>
     <form action="/adicionar" method="POST">
         Nome: <input type="text" name="nome" required><br>
@@ -42,5 +42,34 @@
         Carisma: <input type="number" name="carisma" required><br>
         <button type="submit">Adicionar Ficha</button>
     </form>
+
+    <h2>Rolagem de Dados</h2>
+    <form id="rolar-dados-form">
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
+        <label for="faces">Faces:</label>
+        <input type="number" id="faces" name="faces" min="2" value="6" required>
+        <button type="button" onclick="rolarDados()">Rolar Dados</button>
+    </form>
+    <div id="resultado-rolagem"></div>
+
+    <script>
+        // Função para rolar dados usando JavaScript e exibir o resultado
+        function rolarDados() {
+            const quantidade = document.getElementById('quantidade').value;
+            const faces = document.getElementById('faces').value;
+
+            fetch(`/rolar/${quantidade}d${faces}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultadoDiv = document.getElementById('resultado-rolagem');
+                    resultadoDiv.innerHTML = `
+                        <p>Resultados: ${data.resultados.join(', ')}</p>
+                        <p>Total: ${data.total}</p>
+                    `;
+                })
+                .catch(error => console.error('Erro ao rolar dados:', error));
+        }
+    </script>
 </body>
 </html>
