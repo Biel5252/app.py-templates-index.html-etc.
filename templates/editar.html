@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Ficha</title>
+</head>
+<body>
+    <h1>Editar Ficha</h1>
+    <form action="/editar/{{ indice }}" method="POST">
+        Nome: <input type="text" name="nome" value="{{ ficha.nome }}" required><br>
+        Classe: <input type="text" name="classe" value="{{ ficha.classe }}" required><br>
+        Nível: <input type="number" name="nivel" value="{{ ficha.nivel }}" required><br>
+        Força: <input type="number" name="forca" value="{{ ficha.atributos.forca }}" required><br>
+        Destreza: <input type="number" name="destreza" value="{{ ficha.atributos.destreza }}" required><br>
+        Constituição: <input type="number" name="constituicao" value="{{ ficha.atributos.constituicao }}" required><br>
+        Inteligência: <input type="number" name="inteligencia" value="{{ ficha.atributos.inteligencia }}" required><br>
+        Sabedoria: <input type="number" name="sabedoria" value="{{ ficha.atributos.sabedoria }}" required><br>
+        Carisma: <input type="number" name="carisma" value="{{ ficha.atributos.carisma }}" required><br>
+        <button type="submit">Salvar Alterações</button>
+    </form>
+    <a href="/">
+        <button>Cancelar</button>
+    </a>
+</body>
+</html>

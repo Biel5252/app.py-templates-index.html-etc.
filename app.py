@@ -43,6 +43,39 @@ def adicionar_ficha():
     salvar_fichas()
     return redirect('/')
 
+# Rota para excluir uma ficha
+@app.route('/excluir/<int:indice>', methods=['POST'])
+def excluir_ficha(indice):
+    if 0 <= indice < len(fichas):
+        fichas.pop(indice)
+        salvar_fichas()
+    return redirect('/')
+
+# Rota para editar uma ficha
+@app.route('/editar/<int:indice>', methods=['GET', 'POST'])
+def editar_ficha(indice):
+    if request.method == 'POST':
+        # Atualiza a ficha com os dados do formulário
+        fichas[indice] = {
+            'nome': request.form['nome'],
+            'classe': request.form['classe'],
+            'nivel': request.form['nivel'],
+            'atributos': {
+                'forca': request.form['forca'],
+                'destreza': request.form['destreza'],
+                'constituicao': request.form['constituicao'],
+                'inteligencia': request.form['inteligencia'],
+                'sabedoria': request.form['sabedoria'],
+                'carisma': request.form['carisma']
+            }
+        }
+        salvar_fichas()
+        return redirect('/')
+    else:
+        # Exibe o formulário de edição preenchido com os dados atuais
+        ficha = fichas[indice]
+        return render_template('editar.html', ficha=ficha, indice=indice)
+
 # Função para salvar as fichas no arquivo JSON
 def salvar_fichas():
     with open(FICHAS_FILE, 'w') as f:

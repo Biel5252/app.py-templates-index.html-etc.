@@ -19,10 +19,16 @@
                 <li>Sabedoria: {{ ficha.atributos.sabedoria }}</li>
                 <li>Carisma: {{ ficha.atributos.carisma }}</li>
             </ul>
+            <form action="/excluir/{{ loop.index0 }}" method="POST" style="display:inline;">
+                <button type="submit">Excluir</button>
+            </form>
+            <a href="/editar/{{ loop.index0 }}">
+                <button>Editar</button>
+            </a>
         </li>
         {% endfor %}
     </ul>
-
+    
     <h2>Adicionar Nova Ficha</h2>
     <form action="/adicionar" method="POST">
         Nome: <input type="text" name="nome" required><br>
